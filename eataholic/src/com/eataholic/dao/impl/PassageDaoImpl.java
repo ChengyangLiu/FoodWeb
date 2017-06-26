@@ -43,7 +43,7 @@ public class PassageDaoImpl implements PassageDao {
 		// TODO Auto-generated method stub
 		List<Passage> list=new ArrayList<Passage>();
 		try{
-			list=session.createQuery("select p from Passage as p where p.author like ?").setParameter(0,author).list();		
+			list=session.createQuery("select p from Passage as p where p.author like ? order by p.passageTime desc").setParameter(0,author).list();		
 		}
 	    catch(Exception e){
 	    }
@@ -68,6 +68,19 @@ public class PassageDaoImpl implements PassageDao {
 		List<Passage> list=new ArrayList<Passage>();
 		try{
 			list=session.createQuery("select p from Passage as p order by p.likeNum desc,p.passageTime desc").list();		
+		}
+	    catch(Exception e){
+	    }
+		return list;
+	}
+	
+	
+	@Override
+	public List<Passage> getAllPassageById() {
+		// TODO Auto-generated method stub
+		List<Passage> list=new ArrayList<Passage>();
+		try{
+			list=session.createQuery("select p from Passage as p order by p.id asc").list();		
 		}
 	    catch(Exception e){
 	    }

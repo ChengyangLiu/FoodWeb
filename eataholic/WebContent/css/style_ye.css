@@ -1,11 +1,11 @@
-html, body, div, span, object, iframe,
+html, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code, del, dfn, em, images, ins, kbd, q, samp,
 small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
+ header, hgroup, menu, nav, section, summary,
 time, mark, audio, video, a img {
   margin: 0;
   padding: 0;
@@ -14,15 +14,10 @@ time, mark, audio, video, a img {
 }
 
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+header, hgroup, menu, nav, section {
   display: block;
 }
 
-body {
-  font-family: 'Microsoft yahei',Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  background: #ebcc96 url('../images/body-bg.png') repeat-x;
-}
 body.home {
   background: #ebcc96 url('../images/body-home-bg.png') repeat-x;
 }
@@ -459,7 +454,7 @@ footer {
 }
 footer .footer-holder {
 	margin: 0 0;
-	width: 970px;
+	width: 1170px;
   padding: 0 0px;
   position: relative;
   overflow:hidden;
@@ -519,7 +514,7 @@ footer .rss a {display: block; padding-left: 32px; height: 27px; line-height: 19
 }
 footer .newsletter {
   color: #FFF;
-  width: 360px;
+  width: 560px;
   float: left;
   padding: 9px 0 0;
 }

@@ -20,4 +20,10 @@ public interface PassageOp {
 	//query one passage by passage id
 	public Passage getPassageById(int id);
 
+	//query all passage by passage id asc
+	public List<Passage> getAllPassageById();
+
+	//query passage by author
+	public List<Passage> getPassageByAuthor(String author);
+
 }

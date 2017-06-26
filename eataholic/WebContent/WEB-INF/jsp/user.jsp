@@ -8,127 +8,149 @@
 <%@ page import="com.eataholic.model.Users" %>
 <%@ page import="com.eataholic.service.UserOp" %>
 <%@ page import="com.eataholic.service.impl.UserOpImpl" %>
-    
-<!doctype html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>美食圈子</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="css/style_ye.css?v=2">
-  <script src="js/libs/modernizr-1.7.min.js"></script>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>个人空间</title>
+    <link rel="stylesheet" href="css/skel.css" />
+    <link rel="stylesheet" href="css/style4.css" />
+    <link rel="stylesheet" href="css/style-xlarge.css" />
 
-<%
-	Users user=new Users();
-	user=(Users) request.getAttribute("information");
-	//登录判断
-    String username = "";
-    if (session.getAttribute("connecte") == null
-       || !((String) session.getAttribute("connecte"))
-               .equals("true")) {
-   	 System.out.println("Unlogin");
-    } 
-    else username=(String) session.getAttribute("login");
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+    
+    <style>
+   .ul-list li{
+    	float:left;
+    	list-style:none;
+    	margin:0 20px;
+    }
+    .nav{
+    width:800px;
+    height:50px;
+    margin:0 350px;
+    }
+    .image-profil{
+    	width:150px;
+    	height:135px;
+    	border-radius:50px;
+    }
+    </style>
+</head>
+<body>
+<% 
+//登录判断
+String username = "";
+if (session.getAttribute("connecte") == null || !((String) session.getAttribute("connecte")).equals("true")) {
+	 	System.out.println("Unlogin");
+} 
+else username=(String) session.getAttribute("login");
+
+Users user=new Users();
+user=(Users) request.getAttribute("information");
 %>
 
-<body class="home">
-  <div class='wrapper '>
-    <header>
-      <div class="top-nav">
-        <nav>
-          <ul>
-        <%if(username==""){ %>
-           <li><a href="sign-in" id="login-btn">登录</a></li>
-           <li><a href="sign-in#toregister" class="register-btn">注册</a></li>
-           <%}
-          else{%>
-          <li><a href="UserServlet">欢迎<%=username%></a></li>
-          <%} %>
-           <li><a href="dongtai.html">上传文章</a></li>
-			<li><a href="dongtai.html">关于</a></li>
-          </ul>
-        </nav> 
-      </div>
-          <nav class="main-menu">
-			<ul>
-				<li><a href="index.html">主页</a></li>
-				<li><a href=" menu1.html">美食食谱</a></li>
-				<li><a href="listing.html">美食分享</a></li>
-				<li><a href="listing.html">美食趣事</a></li>
-				<li><a href="dongtai.html">美食圈子</a></li>
-				<li id="lava-elm"></li>
-			</ul>
-	</nav>
-      <a href="index.jsp" class="logo"><img src="images/logo.png" alt="your logo" /></a>
-      <div class="header-slider-canvas">
-		<div class="parts part-1"></div>
-		<div class="parts part-2"></div>
-		<div class="parts part-3"></div>
-	  </div>
-	  <ul id="mycarousel" class="jcarousel-skin-header-slider">
-		<li><img src="images/toystory.jpg" width="680px" height="464" alt="" /></li>
-		<li><img src="images/up.jpg" width="680px"  height="464" alt="" /></li>
-		<li><img src="images/walle.jpg" width="680px"  height="464" alt="" /></li>
-		<li><img src="images/nemo.jpg" width="680px"  height="464" alt="" /></li>
-	  </ul>
-    </header>
+<div class="nav">
+	<ul class="ul-list">
+			<li><a href="index.jsp">主页</a></li>
+			<li><a href="recipe">美食食谱</a></li>
+			<li><a href="share">美食分享</a></li>
+			<li><a href="anecdote">美食趣事</a></li>
+			<li><a href="#">美食圈子</a></li>
+		</ul>
+</div>
 
-    
-    
-   	
-			
-			
-			
-	<footer>
-		<div class="footer-holder" >
-			<a href="" class="logo">Cooker Logo</a>
-				<div class="newsletter">
-					<div class="quote">
-						<h6>Newsletter</h6>
-							<p>Sign-up for our newsletter and be always aware of the new offers and services:</p>
-								<form method="post">
-									<input type="text"><input type="submit" value="Submit" class="submit-button">
-								</form>
-							</div>
-						</div>
-						
-						<div class="links">
-							<h6>useful links</h6>
-							<ul>
-								<li><a href="#">联系我们</a></li>
-								<li><a href="#">团队介绍</a></li>
-								<li><a href="#">隐私政策</a></li>
-								<li><a href="#">服务条款</a></li>
-								<li><a href="#">广告合作</a></li>
-								<li><a href="#">加入我们</a></li>
-							</ul>
-						</div>
-						
-			</div>
-	</footer>
+		
+
+<div id="wrapper" style="margin: 0px 100px;">
+    <!-- Header -->
+    <section id="header" class="skel-layers-fixed" style="background-color: #D32F2F;">
+        <header>
+            <span class="image avatar"><img class="image-profil" src="<%=user.getProfil() %>" alt="我的照骗"/></span>
+            <h1><%=user.getUserName() %> </h1>
+            <p>I never stop eat delicious food<br/>
+                and now I'm hungry!</p>
+        </header>
+        <nav id="nav">
+            <ul>
+                <li><a href="#one" class="active">个人信息</a></li>
+                <li><a href="#two">我的文章</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- Main -->
+    <div id="main">
+        <!-- One -->
+        <section id="one" >
+            <div class="container" margin=0,0 >
+                <header class="major">
+                    <h2 style="font-size: 72px">关于我</h2>
+                </header>
+                <h4 >语录</h4>
+                <p style="font-size: 18px">
+                <%=user.getDescription() %>
+                </p>
+                <h4 style="margin: 35px 0;">个人简介</h4>
+                <section>
+                    <div class="table-wrapper">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>用户名：</td>
+                                <td><%=user.getUserName() %></td>
+                            </tr>
+                            <tr>
+                                <td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</td>
+                                <td><%=user.getGender() %></td>
+                            </tr>
+                            <tr>
+                                <td>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</td>
+                                <td><%=user.getEmail() %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Two -->
+        <section id="two">
+            <div class="container">
+                <h3>我的文章</h3>
+                <p>作为一名资深吃货，我可发表过不少文章哟！</p>
+                <div class="features">
+                <%
+                PassageOp passageOp=new PassageOpImpl();
+                List<Passage> passageList=new ArrayList<Passage>();
+                passageList=passageOp.getPassageByAuthor(user.getUserName());
+                for(Passage passage:passageList){
+                %>
+                    <article>
+                        <a href="article?id=<%=passage.getId() %>" class="image"><img style="width:200px;height:200px" src="<%=passage.getPhoto() %>"/></a>
+                        <div class="inner">
+                            <h4><%=passage.getTitle() %></h4>
+                            <p style="font-size:10px; margin:0 100px;"><%=passage.getPassageTime() %></p>
+                        </div>
+                    </article>
+                 <%} %>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div>
+
+
+</div>
+
+<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+<script src="js/jquery.min2.js"></script>
+<script src="js/jquery.scrollzer.min.js"></script>
+<script src="js/jquery.scrolly.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/skel-layers.min.js"></script>
+<script src="js/init.js"></script>
 </body>
-
-	
-	<script type="text/javascript" src="js/libs/jquery-1.7.1.min.js"></script>
-  <script src="js/libs/jquery.easing.1.3.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/libs/jquery.jcarousel.min.js"></script>
-	
-	<script type="text/javascript">
-	// FRONT SLIDER STARTER
-jQuery(document).ready(function() {
-jQuery('#mycarousel').jcarousel({
-auto: 3,
-wrap: 'last',
-scroll: 1,
-animation: 'slow',
-initCallback: mycarousel_initCallback,
-});
-}); 
-	</script>
-
 </html>

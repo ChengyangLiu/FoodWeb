@@ -5,12 +5,12 @@ import javax.persistence.*;
 @Entity  
 @Table(name="Users")  
 public class Users {
-	private String userName;
-	private String passCode;
-	private String email;
-	private String description;
-	private String profil;
-	private String gender;
+	private String userName;//用户名
+	private String passCode;//密码
+	private String email;//邮箱
+	private String description;//简介
+	private String profil;//头像
+	private String gender;//性别
 	
 	@Id
 	@Column(name = "userName")  
@@ -27,7 +27,7 @@ public class Users {
 	public void setPassCode(String passCode){
 		this.passCode=passCode;
 	}
-	@Column(name = "eamil")  
+	@Column(name = "email")  
 	public String getEmail(){
 		return email;
 	}

@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT primary key,
   `belong_Passage` int(11) NOT NULL,
   `belong_User` varchar(20) NOT NULL,
   `content` varchar(100) NOT NULL,
@@ -54,7 +55,7 @@ DROP TABLE IF EXISTS `passage`;
 CREATE TABLE `passage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `author` varchar(20) NOT NULL,
-  `content` varchar(20000) DEFAULT NULL,
+  `content` text(200000) DEFAULT NULL,
   `click` int(11) DEFAULT '0',
   `commentNum` int(11) DEFAULT '0',
   `likeNum` int(11) DEFAULT '0',
@@ -88,9 +89,9 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `userName` varchar(20) NOT NULL,
   `passCode` varchar(20) NOT NULL,
-  `eamil` varchar(30) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
   `description` varchar(100) DEFAULT '这家伙很懒，什么都没留下...',
-  `profil` varchar(50) DEFAULT NULL,
+  `profil` varchar(50) DEFAULT 'images/default.jpg',
   `gender` varchar(10) DEFAULT '未知',
   PRIMARY KEY (`userName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

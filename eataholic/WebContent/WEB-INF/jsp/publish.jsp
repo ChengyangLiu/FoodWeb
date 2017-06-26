@@ -23,6 +23,20 @@
   <script src="/eataholic/ueditor/ueditor.parse.js"></script>
   <script type="text/javascript" src="/eataholic/ueditor/ueditor.config.js"></script>
   <script type="text/javascript" src="/eataholic/ueditor/ueditor.all.js"></script>
+  <script>   
+	function PreviewImage(imgFile) {
+		var pattern = /(\.*.jpg$)|(\.*.png$)|(\.*.jpeg$)|(\.*.gif$)|(\.*.bmp$)/;
+		if (!pattern.test(imgFile.value)) {
+			alert("系统仅支持jpg/jpeg/png/gif/bmp格式的照片！");
+			imgFile.focus();
+		} 
+		path = URL.createObjectURL(imgFile.files[0]);
+		document.getElementById("imgPreview").innerHTML = "<img src='"+path+"' style='width:200px; height:200px;' />";
+	}
+</script>
+  <style>
+  .newsletter{margin:0 200px;}
+  </style>
 </head>
 
 <%
@@ -45,15 +59,21 @@
     <div class="top-nav">
       <nav>
         <ul>
-          <%if(username==""){ %>
-          <li><a href="sign-in" id="login-btn">登录</a></li>
-          <li><a href="sign-in#toregister" class="register-btn">注册</a></li>
-          <%}
+          <%if(username.equals("")){ %>
+           <li><a href="sign-in" id="login-btn">登录</a></li>
+           <li><a href="sign-in#toregister" class="register-btn">注册</a></li>
+           <%}
           else{%>
           <li><a href="UserServlet">欢迎<%=username%></a></li>
           <%} %>
-          <li><a href="publish">上传文章</a></li>
-	      <li><a href="about.jsp">关于</a></li>
+            <li><a href="publish">上传文章</a></li>
+			<li><a href="about.jsp">关于</a></li>
+			<%if(username.equals("我是一条咸鱼")){ %>
+			<li><a href="manage">管理</a></li>
+			<%} %>
+			<%if(!username.equals("")){ %>
+			<li><a href="exit">注销</a></li>
+			<%} %>
         </ul>
       </nav> 
       <form class="search-form" method="post">
@@ -67,10 +87,10 @@
 	<nav class="main-menu">
 		<ul>
 		    <li><a href="index.jsp">主页</a></li>
-			<li><a href="">美食食谱</a></li>
-			<li><a href="">美食分享</a></li>
-			<li><a href="">美食趣事</a></li>
-			<li><a href="">美食圈子</a></li>
+			<li><a href="recipe">美食食谱</a></li>
+			<li><a href="share">美食分享</a></li>
+			<li><a href="anecdote">美食趣事</a></li>
+			<li><a href="#">美食圈子</a></li>
 			<li id="lava-elm"></li>
 		</ul>
 	</nav>
@@ -96,8 +116,10 @@
     		</select>
     		<br></br>
     		<label for="contact-subject">封面:<span class="required">*</span></label>
-    		<input type="text"/ name="title" id="contact-your-email" class="input text">  
-     		<input type="button" id="myEditorImagesss" onclick="upImage();" value="上传封面"/>
+    		<br></br>
+    		<input type="file" name="pic" onchange='PreviewImage(this)'/>	
+    		<br></br>
+    		<div id="imgPreview" style="margin:0 30px;"> </div>
      		<br></br>
 			<label for="contact-details">正文 <span class="required">*</span></label>
 			<br></br>
@@ -108,11 +130,10 @@
 		</fieldset>
 	  </form>
     </div>
-  </div>			
-</div>
-
-<footer>
-	<div class="footer-holder">
+  </div>		
+  </div>	
+	<footer>
+	  <div class="footer-holder">
 		<a href="" class="logo">Cooker Logo</a>
 		<div class="newsletter">
 			<div class="quote">
@@ -134,8 +155,8 @@
 			  <li><a href="#">加入我们</a></li>
 		  </ul>
 	    </div>
-    </div>
-</footer>
+      </div>
+	</footer>
 	
 </body>
 

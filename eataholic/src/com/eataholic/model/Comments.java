@@ -7,12 +7,22 @@ import javax.persistence.*;
 @Entity  
 @Table(name="Comments")  
 public class Comments {
+	private int id;
 	private int belong_Passage;
 	private String belong_User;
 	private String content;
 	private Timestamp remarkTime;
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)  
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Column(name = "belong_Passage") 
 	public int getBelong_Passage() {
 		return belong_Passage;

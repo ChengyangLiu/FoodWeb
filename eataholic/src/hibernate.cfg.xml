@@ -26,6 +26,8 @@
         <mapping class="com.eataholic.model.Users" />
         <mapping class="com.eataholic.model.Passage" />
         <mapping class="com.eataholic.model.Comments" />
+        
+        
     </session-factory>  
     
 </hibernate-configuration>  

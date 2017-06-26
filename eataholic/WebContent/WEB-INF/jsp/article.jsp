@@ -30,6 +30,7 @@
 .left_pos{float:left}
 .center_pos{float:center}
 .right_pos{float:right}
+.newsletter{margin:0 200px;}
 </style>
 
 </head>
@@ -70,16 +71,22 @@ request.setAttribute("id",s);
     <div class="top-nav">
       <nav>
         <ul>
-          <%if(username==""){ %>
-          <li><a href="sign-in" id="login-btn">登录</a></li>
-          <li><a href="sign-in#toregister" class="register-btn">注册</a></li>
-          <%}
+          <%if(username.equals("")){ %>
+           <li><a href="sign-in" id="login-btn">登录</a></li>
+           <li><a href="sign-in#toregister" class="register-btn">注册</a></li>
+           <%}
           else{%>
           <li><a href="UserServlet">欢迎<%=username%></a></li>
           <%} %>
-          <li><a href="publish">上传文章</a></li>
-	      <li><a href="about.jsp">关于</a></li>
-        </ul>
+            <li><a href="publish">上传文章</a></li>
+			<li><a href="about.jsp">关于</a></li>
+			<%if(username.equals("我是一条咸鱼")){ %>
+			<li><a href="manage">管理</a></li>
+			<%} %>
+			<%if(!username.equals("")){ %>
+			<li><a href="exit">注销</a></li>
+			<%} %>
+          </ul>
       </nav> 
       <form class="search-form" method="post">
          <input type="text" class="search">
@@ -92,10 +99,10 @@ request.setAttribute("id",s);
 	<nav class="main-menu">
 		<ul>
 		    <li><a href="index.jsp">主页</a></li>
-			<li><a href="">美食食谱</a></li>
-			<li><a href="">美食分享</a></li>
-			<li><a href="">美食趣事</a></li>
-			<li><a href="">美食圈子</a></li>
+			<li><a href="recipe">美食食谱</a></li>
+			<li><a href="share">美食分享</a></li>
+			<li><a href="anecdote">美食趣事</a></li>
+			<li><a href="#">美食圈子</a></li>
 			<li id="lava-elm"></li>
 		</ul>
 	</nav>
@@ -107,65 +114,66 @@ request.setAttribute("id",s);
 			<li><%=passage.getTitle() %></li>
 		</ul>
 	</div>
-	<div class="left-content"  style="padding-left: 80px;">
+	<div class="left-content"  >
+	</div>
+  </div>
+
 	
 	<!-- ***************************需要前端部分 ********START******************-->
-	
-	<div class="article_title"><%=passage.getTitle()%></div>
-	<div class="article_author"><%=passage.getAuthor()%></div>
-	<div class="article_publish_time"><%=passage.getPassageTime()%></div>
-	<div class="article_click"><%=passage.getClick()%></div>
-	<div class="article_remark_num"><%=passage.getCommentNum()%></div>
-	<div class="article_like"><%=passage.getLikeNum()%></div>
-	
-	<div class="article_content"><%=passage.getContent()%></div>
-	
-    <div class="article_click"><%=passage.getClick()%></div>
-	<div class="article_remark_num"><%=passage.getCommentNum()%></div>
-	<div class="article_like"><%=passage.getLikeNum()%></div>
-	
-	<div class="article_remark">
-	  <div class="each_remark">
+	<div style="text-align: center; width:960px;" >
+		<h2 style="text-align: center"><%=passage.getTitle()%></h2>
+		<div style="text-align: center;padding-top: 40px;">
+		<span  style="padding-right: 40px;">作者：<%=passage.getAuthor()%></span>
+		<span  style="padding-right: 40px;">点击数：<%=passage.getClick()%></span>
+		<span  style="padding-right: 40px;">评论数：<%=passage.getCommentNum()%></span>
+		<span  style="padding-right: 40px;">喜爱数：<%=passage.getLikeNum()%></span>
+		<span  style="padding-right: 40px;">发表时间：<%=passage.getPassageTime()%></span>
+		</div>
+		<hr/>
+		</div>
+		<div style="width: 900px; padding-top: 40px; padding-left: 40px;">
+		<span style="font-size: 20px;"><%=passage.getContent()%></span>
+		<hr/>
+	    <span style="font-size: 15px;font-weight:bold;color: black">评论区</span>
+	    <hr/>
 	    <% for(Comments n:commentList){
 		    user=userOp.getUsersInfo(n.getBelong_User());
+		    System.out.println(n.getContent());
 		%>
-		<div>
-			<div class="left_pos">
-				<div class="user_profil"><img src="<%=user.getProfil()%>"></img>
-					
-				</div>
-				<div class="user_name"><span>用户名：</span><%=user.getUserName()%></div>
-				<div class="user_gender"><span>性别：</span><%=user.getGender()%></div>
-				<div class="user_des"><span>个人简介：</span><%=user.getDescription()%></div>			
-			</div>
-			<div class="center_pos">
-				<div class="remark_content"><%=n.getContent()%></div>
-			</div>
-			<div class="right_pos">
-				<div class="remark_time"><%=n.getRemarkTime()%></div>
-			</div>
-		</div>
-		<% }%>
-	  </div>
-	</div>
-	   <form name="comment" action="/eataholic/RemarkServlet?id=<%=s%>" method="post" onSubmit="return myCheck()">
- 		<p class="text"><textarea name="text"></textarea></p>
- 		 <%if(username!=""){ %>
-  		<p class="submit"><input type="submit" value="留言" /></p>
-  		<%}
-  		else{ 
- 		 %>
- 		<p class="submit"><a href="sign-in">登录</a>后可以留言</p>
- 		<%} %>
-	</form>
-  	</div>
-  </div>		
-</div>
+	    <dl style="padding-bottom: 10px;">
+	    	<dt style="float: left; width: 150px; height: 50px;">
+	    		<div style="padding-left: 10px;">
+	    			<img src="<%=user.getProfil()%>" style="width: 50px; height: 50px; border-radius:30px;"></img>
+	    		</div>
+	    		<div><a href="#"><%=user.getUserName()%></a></div>
+	    	</dt>
+	    	<dd style="padding-bottom: 10px;"><span style="float: right;"><%=n.getRemarkTime()%></span></dd>
+	    	<dd style="padding-left: 140px;"><%=n.getContent()%></dd>
+	    	<hr/>
+	    </dl>
+	    <% }%>
+	    
+	    <div style="text-align: center;">
+	    	<form name="comment" action="/eataholic/RemarkServlet?id=<%=s%>" 
+	    	 method="post" onSubmit="return myCheck()">
+ 			<p class="text"><textarea name="text"></textarea></p>
+ 			 <%if(username!=""){ %>
+  			<p class="submit">
+  				<input type="submit" value="留言" />
+  			</p>
+  			<%}
+  			else{ 
+ 			 %>
+ 			<p class="submit"><a href="sign-in">登录</a>后可以留言</p>
+ 			<%} %>
+			</form>
+	    </div>
 
+	
          <!-- ***************************需要前端部分 ********END******************-->
- 
+
 <footer>
-	<div class="footer-holder">
+	<div class="footer-holder" >
 		<a href="" class="logo">Cooker Logo</a>
 		<div class="newsletter">
 			<div class="quote">
@@ -188,8 +196,10 @@ request.setAttribute("id",s);
 		  </ul>
 	    </div>
     </div>
-
 </footer>
+</div>
+ </div>
+
 
 <script type="text/javascript">  
     function myCheck()  

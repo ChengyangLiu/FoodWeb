@@ -8,6 +8,7 @@ import com.eataholic.dao.PassageDao;
 import com.eataholic.dao.impl.CommentsDaoImpl;
 import com.eataholic.dao.impl.PassageDaoImpl;
 import com.eataholic.model.Comments;
+import com.eataholic.model.Passage;
 import com.eataholic.service.CommentsOp;
 
 public class CommentsOpImpl implements CommentsOp{
@@ -41,6 +42,21 @@ public class CommentsOpImpl implements CommentsOp{
 		// TODO Auto-generated method stub
 		if(commentDao.addComment(comment))return true;
 		else return false;
+	}
+	
+	@Override
+	public List<Comments> getAllCommentsById() {
+		// TODO Auto-generated method stub
+		List<Comments> list=new ArrayList<Comments>();
+		list=commentDao.getAllCommentById();
+		return list;
+	}
+	
+	@Override
+	public Comments getCommentById(int id){
+		Comments comment=new Comments();
+		comment=commentDao.getCommentById(id);
+		return comment;
 	}
 
 }

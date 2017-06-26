@@ -49,7 +49,7 @@ public class SignInServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if(username!=""&&password!=""){
+		if(!username.equals("")&&!password.equals("")){
 			UserSignIn userSign=new UserSignInImpl();
 			Users user=new Users();
 			user.setUserName(username);
@@ -65,8 +65,12 @@ public class SignInServlet extends HttpServlet {
 	            //加入用户登录信息
 				session.setAttribute("connecte", "true");
 				session.setAttribute("login", user.getUserName());
-				
-				response.sendRedirect("index.jsp");
+				String url="index.jsp";
+				if(session.getAttribute("preurl")!=null){
+					url=(String) session.getAttribute("preurl");
+					session.removeAttribute("preurl");
+				}
+				response.sendRedirect(url);
 			}
 			else{//failure,return log page and send error message
 				request.setAttribute("error","error");

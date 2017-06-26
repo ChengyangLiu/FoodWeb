@@ -19,13 +19,24 @@
         <link rel="stylesheet" type="text/css" href="/eataholic/css/demo.css" />
         <link rel="stylesheet" type="text/css" href="/eataholic/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="/eataholic/css/animate-custom.css" />
+		<style>
+			.container header h1{
+				color:rgba(255,0,0,0.4);
+			}
+			.container header h1 span{
+				color:rgba(255,0,0,0.6);
+			}
+			.log{
+				color:rgba(255,0,0,0.6);
+			}
+		</style>
     </head>
     <body>
     	<%String error_s=(String) request.getAttribute("error"); 
     	  String error_register=(String) session.getAttribute("registerError");
     	%>
         <div class="container">
-            <header>
+            <header >
                 <h1>欢迎来到<span>美食圈子</span></h1>
             </header>
             <section>				
@@ -35,7 +46,7 @@
                     <div id="wrapper">
                         <div id="login" class="animate form">
                             <form  action="SignInServlet" autocomplete="on" method="post"> 
-                                <h1>登录</h1> 
+                                <h1 class="log">登录</h1> 
                                 <p> 
                                     <label for="username" class="uname" data-icon="u" >美食圈名 </label>
                                     <input id="username" name="username" required="required" type="text" />
@@ -56,12 +67,12 @@
 									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
 									<label for="loginkeeping">记住密码</label>
 								</p>
-                                <p class="login button"> 
-                                    <input type="submit" value="登录" /> 
+                                <p class="login button" > 
+                                    <input type="submit" value="登录" style="background:#CD0000" /> 
 								</p>
                                 <p class="change_link">
 									还未加入美食圈子？
-									<a href="#toregister" class="to_register">注册账号</a>
+									<a href="#toregister" class="to_register" style="color:rgba(255,0,0,0.8)">注册账号</a>
 								</p>
                             </form>
                         </div>
@@ -108,11 +119,11 @@
                                     %>
                                 </p>
                                 <p class="signin button"> 
-									<input type="submit" value="注册"/> 
+									<input type="submit" value="注册" style="background:#CD0000"/> 
 								</p>
                                 <p class="change_link">  
 									已经是圈中一员？
-									<a href="#tologin" class="to_register">登录</a>
+									<a href="#tologin" class="to_register" style="color:rgba(255,0,0,0.8)">登录</a>
 								</p>
                             </form>
                         </div>

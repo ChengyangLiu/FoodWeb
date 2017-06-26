@@ -60,8 +60,8 @@ public class RegisterServlet extends HttpServlet {
 		String password_confirm = request.getParameter("passwordsignup_confirm");
 		String email = request.getParameter("emailsignup");
 		HttpSession session = request.getSession();
-		if(username!=""&&password!=""&&email!=""&&password_confirm!=""){
-			if(password!=password_confirm){
+		if(!username.equals("")&&!password.equals("")&&!email.equals("")&&!password_confirm.equals("")){
+			if(!password.equals(password_confirm)){
 				session.setAttribute("registerError","password_error");
 				response.sendRedirect("sign-in#toregister");
 			}
@@ -70,8 +70,13 @@ public class RegisterServlet extends HttpServlet {
 				user.setUserName(username);
 				user.setPassCode(password);
 				user.setEmail(email);
+				user.setDescription("这家伙很懒，什么都没留下...");
+				user.setProfil("images/default.jpg");
+				user.setGender("未知");
+				//System.out.println(username);
 				UserRegister userRegister=new UserRegisterImpl();
 				int code=userRegister.addUser(user);
+				//System.out.println(code);
 				if(code>0){//success
 					response.sendRedirect("sign-in");
 				}

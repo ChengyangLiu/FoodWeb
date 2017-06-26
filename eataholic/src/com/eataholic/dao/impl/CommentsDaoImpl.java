@@ -63,5 +63,29 @@ public class CommentsDaoImpl implements CommentsDao{
 	    }
 		return list;
 	}
+	
+	@Override
+	public List<Comments> getAllCommentById() {
+		// TODO Auto-generated method stub
+		List<Comments> list=new ArrayList<Comments>();
+		try{
+			list=session.createQuery("select c from Comments as c order by c.id asc").list();		
+		}
+	    catch(Exception e){
+	    }
+		return list;
+	}
+	
+	@Override
+	public Comments getCommentById(int id){
+		Comments comment=new Comments();
+		try{
+			comment=(Comments) session.get(Comments.class,id);  		
+		}
+		catch(Exception e){
+			
+	    }
+		return comment;
+	}
 
 }

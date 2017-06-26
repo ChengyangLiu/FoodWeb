@@ -1,9 +1,14 @@
 package com.eataholic.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.eataholic.model.Passage;
 import com.eataholic.service.PassageOp;
@@ -51,6 +61,9 @@ public class PublishServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		//check logged state
 		if(session.getAttribute("connecte")==null||!((String) session.getAttribute("connecte")).equals("true")){
+			String url=request.getHeader("referer");
+			System.out.println(url);
+			session.setAttribute("preurl", url);
 			response.sendRedirect("sign-in");
 		}
 		else{//logged
@@ -64,17 +77,22 @@ public class PublishServlet extends HttpServlet {
 			Timestamp datetime = new Timestamp(System.currentTimeMillis()); 
 			passage.setPassageTime(datetime);
 			passage.setTitle(request.getParameter("title"));
-			passage.setPhoto("ceshi");
+			String str="images/";
+			passage.setPhoto(str+request.getParameter("pic"));
 			passage.setPassageType(request.getParameter("type"));
 			
 			PassageOp passageOp=new PassageOpImpl();
 			if(passageOp.addPassage(passage)){//success
 				//to article
-				response.sendRedirect("index.jsp");
+				System.out.println(passage.getId());
+				Integer id=passage.getId();
+				String idstr=id.toString();
+				String url="article?id="+ idstr;
+				response.sendRedirect(url);
 			}
 			else{
 				//to error page
-				response.sendRedirect("sign-in");
+				response.sendRedirect("404.jsp");
 			}
 		}
 	}

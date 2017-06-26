@@ -48,5 +48,19 @@ public class PassageOpImpl implements PassageOp{
 		passage=passageDao.getPassageById(id);
 		return passage;
 	}
+	
+	@Override
+	public List<Passage> getAllPassageById(){
+		List<Passage> passageList=new ArrayList<Passage>();
+		passageList=passageDao.getAllPassageById();
+		return passageList;
+	}
+	
+	@Override
+	public List<Passage> getPassageByAuthor(String author){
+		List<Passage> passageList=new ArrayList<Passage>();
+		passageList=passageDao.getPassageByAuthor(author);
+		return passageList;
+	}
 
 }

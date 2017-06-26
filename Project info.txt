@@ -1,0 +1,25 @@
+Project Name:Eataholic
+
+Leader:Chengyang Liu
+
+Group:Bingbing Ye
+      Yinyu Song
+      Zhibo Li
+      Junjie Zhang
+      Ying Xiang
+
+Task Allocation:
+
+HTML+CSS+JS:Bingbing Ye,Yinyu Song
+
+MYSQL+Servlet+Designer:Chengyang Liu
+
+Info Collector: Zhibo Li,Junjie Zhang,Ying Xiang
+
+Date:From June,1st,2017  To  June,21th,2017
+
+Environment:Eclipse any version
+
+JDK Version:1.7
+
+Tomcat:apache-tomcat-7.0.77

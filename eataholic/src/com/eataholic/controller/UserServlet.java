@@ -44,10 +44,12 @@ public class UserServlet extends HttpServlet {
 			UserOp userOp=new UserOpImpl();
 			Users user=new Users();
 			String user_name=(String) session.getAttribute("login");
+			//System.out.println(user_name);
 			user=userOp.getUsersInfo(user_name);
+			//System.out.println(user.getUserName());
+			
 			request.setAttribute("information", user);
-			String url="/WEB-INF/jsp/user.jsp";
-			request.getRequestDispatcher(url).forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
 		}
 	}
 

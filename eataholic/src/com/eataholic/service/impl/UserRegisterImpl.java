@@ -14,14 +14,14 @@ public class UserRegisterImpl implements UserRegister {
 	@Override
 	public boolean checkUserName(String name) {
 		// TODO Auto-generated method stub
-		if(userdao.getUserName(name))return true;
+		if(userdao.getUserName(name)==true)return true;
 		else return false;
 	}
 
 	@Override
 	public boolean checkUserEmail(String email) {
 		// TODO Auto-generated method stub
-		if(userdao.getUserEmail(email))return true;
+		if(userdao.getUserEmail(email)==true)return true;
 		else return false;
 	}
 
@@ -29,8 +29,10 @@ public class UserRegisterImpl implements UserRegister {
 	public int addUser(Users user) {
 		// TODO Auto-generated method stub
 		String tmp=user.getUserName();
-		if(!checkUserName(tmp))return -1;	
-		if(!checkUserEmail(tmp))return -2;
+		if(checkUserName(tmp)==true)return -1;	
+		tmp=user.getEmail();
+		System.out.println(tmp);
+		if(checkUserEmail(tmp)==true)return -2;
 		try{
 			userdao.addUser(user);
 		}

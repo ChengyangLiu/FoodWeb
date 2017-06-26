@@ -32,5 +32,8 @@ public interface PassageDao {
 	
 	//get a passage by id from DB
 	public Passage getPassageById(int id);
+
+	//get all passage from DB by id asc
+	public List<Passage> getAllPassageById();
 	
 }

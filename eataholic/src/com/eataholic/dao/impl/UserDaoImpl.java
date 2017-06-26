@@ -19,14 +19,16 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub  
 		List<String> list=new ArrayList<String>();
 		try{
-			list=session.createQuery("select userName from Users where userName like ?").setParameter(0,name).list();		
+			list=session.createQuery("select u from Users as u where u.userName like ?").setParameter(0,name).list();		
 		}
 	    catch(Exception e){
-	    	return false;
+	    	return true;
 	    }
-		if(list==null)return true;
-		else if(list.size()==0)return true;
-		else return false;
+		if(list==null)return false;
+		else if(list.size()==0)return false;
+		else {
+			return true;
+		}
 	}
 	
 	@Override
@@ -34,14 +36,17 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		List<String> list=new ArrayList<String>();
 		try{
-			list=session.createQuery("select eamil from Users where eamil like ?").setParameter(0,email).list();		
+			list=session.createQuery("select u from Users as u where u.email like ?").setParameter(0,email).list();		
 		}
 	    catch(Exception e){
-	    	return false;
+	    	return true;
 	    }
-		if(list==null)return true;
-		else if(list.size()==0)return true;
-		else return false;
+		System.out.println(list.size());
+		if(list==null)return false;
+		else if(list.size()==0)return false;
+		else {
+			return true;
+		}
 	}
 
 	@Override

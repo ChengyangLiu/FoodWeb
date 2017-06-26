@@ -40,6 +40,9 @@
 	.right_position{float:right;}
 
 	.clear {content:".";display:block;clear:both;height:0;visibility:hidden;}
+
+	.newsletter{margin:0 200px;}
+	
 </style>
 
 </head>
@@ -63,15 +66,21 @@
       <div class="top-nav">
         <nav>
           <ul>
-          <%if(username==""){ %>
+          <%if(username.equals("")){ %>
            <li><a href="sign-in" id="login-btn">登录</a></li>
            <li><a href="sign-in#toregister" class="register-btn">注册</a></li>
            <%}
           else{%>
           <li><a href="UserServlet">欢迎<%=username%></a></li>
           <%} %>
-           <li><a href="publish">上传文章</a></li>
+            <li><a href="publish">上传文章</a></li>
 			<li><a href="about.jsp">关于</a></li>
+			<%if(username.equals("我是一条咸鱼")){ %>
+			<li><a href="manage">管理</a></li>
+			<%} %>
+			<%if(!username.equals("")){ %>
+			<li><a href="exit">注销</a></li>
+			<%} %>
           </ul>
         </nav> 
                <form class="search-form" method="post">
@@ -83,10 +92,10 @@
           <nav class="main-menu">
 			<ul>
 				<li><a href="index.jsp">主页</a></li>
-				<li><a href="">美食食谱</a></li>
-				<li><a href="">美食分享</a></li>
-				<li><a href="">美食趣事</a></li>
-				<li><a href="">美食圈子</a></li>
+				<li><a href="recipe">美食食谱</a></li>
+				<li><a href="share">美食分享</a></li>
+				<li><a href="anecdote">美食趣事</a></li>
+				<li><a href="#">美食圈子</a></li>
 				<li id="lava-elm"></li>
 			</ul>
 		</nav>
@@ -103,118 +112,32 @@
 		<li><img src="images/nemo.jpg" width="680px"  height="464" alt="" /></li>
 	  </ul>
     </header>
-    <div class="content clearfix">
-	
- 	    <div class="product-menu-header"><h2>美食食谱</h2><a href="#" class="right_position">阅读更多</a></div>
-    
-	
-		<div class="itemBox">
-    		<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  					am-avg-md-3 am-avg-lg-6 am-gallery-default">
-       <% int i=0;
-        for(Passage n : paRecipe)
-		{
-			if(n==null||i>=10)break;
-			Users user=new Users();
-			UserOp uo=new UserOpImpl();
-			user=uo.getUsersInfo(n.getAuthor());
-        %>
-        	<div class="item">
-                <a href="article?id=<%=n.getId()%>" >
-                    <img class="photo" src="img/a1.jpg" alt="<%=n.getTitle()%>"/>
-                </a>
-                <div class="title"><b><span><%=n.getTitle()%></span></b></div>
-                <div class="article_info">
-                	<span>点击 <%=n.getClick()%>  </span>
-                	<span>评论 <%=n.getCommentNum()%>  </span>
-                	<span>喜爱 <%=n.getLikeNum()%></span>
-                </div>
-            
-            <a class="author" >
-           		<span><img class="photoinfo" width="20" height="20" src="<%=user.getProfil()%>" alt=""></span>
-          		<span><%=n.getAuthor()%></span>
-          	</a>
-          	</div>
-        <%
-        i++;}
-        %>
-   			</ul>
+</div>
+
+ 	<div style="padding-top: 0px;">
+ 	
+ 		<p style="font-family: 隶书;font-size: 30px;color:gray;padding-left: 500px"> 几点啦，吃点什么好呢？？？
+		<img src="images/jiujie.png" style="padding-left: 10px;" >
+		<img src="images/jiujie.png" style="padding-left: 10px;">
+		<img src="images/jiujie.png" style="padding-left: 10px;" >
+		</p>
+		
+		<div style="padding-top: 20px; float: left;width: 1400px;height: 70px;">
+			<a id="aa" href="3.jsp" target="shiwuqiehuan"><img src="images/shijian1.png" style="float: left"></a>
+			<a id="aa" href="1.jsp" target="shiwuqiehuan"><img src="images/shijian2.png" style="float: left"></a>
+			<a id="aa" href="2.jsp" target="shiwuqiehuan"><img src="images/shijian3.png" style="float: left"></a>
+			<a id="aa" href="3.jsp" target="shiwuqiehuan"><img src="images/shijian4.png" style="float: left"></a>
+			<a id="aa" href="4.jsp" target="shiwuqiehuan"><img src="images/shijian5.png" style="float: left"></a>
+			<a id="aa" href="1.jsp" target="shiwuqiehuan"><img src="images/shijian6.png" style="float: left"></a>
+			<a id="aa" href="5.jsp" target="shiwuqiehuan"><img src="images/shijian7.png" style="float: left"></a>
 		</div>
-    
-    <div class="product-menu-header"><h2>美食分享</h2><a href="#" class="right_position">阅读更多</a></div>
-    
-	
-		<div class="itemBox">
-    		<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  					am-avg-md-3 am-avg-lg-6 am-gallery-default">
-       <% i=0;
-        for(Passage n : paShare)
-		{
-			if(n==null||i>=10)break;
-			Users user=new Users();
-			UserOp uo=new UserOpImpl();
-			user=uo.getUsersInfo(n.getAuthor());
-        %>
-        	<div class="item">
-                <a href="article?id=<%=n.getId()%>" >
-                    <img class="photo" src="img/a1.jpg" alt="<%=n.getTitle()%>"/>
-                </a>
-                <div class="title"><b><span><%=n.getTitle()%></span></b></div>
-                <div class="article_info">
-                	<span>点击 <%=n.getClick()%>  </span>
-                	<span>评论 <%=n.getCommentNum()%>  </span>
-                	<span>喜爱 <%=n.getLikeNum()%></span>
-                </div>
-            
-            <a class="author" >
-           		<span><img class="photoinfo" width="20" height="20" src="<%=user.getProfil()%>" alt=""></span>
-          		<span><%=n.getAuthor()%></span>
-          	</a>
-          	</div>
-        <%
-        i++;}
-        %>
-   			</ul>
+		
+		<div style="padding-left: 200px; padding-top: 0px;padding-bottom: 20px;">
+			<iframe width="960px"  height="620px;" name="shiwuqiehuan" frameborder="0" src="1.jsp"></iframe>
 		</div>
-    
-    
-    <div class="product-menu-header"><h2>美食趣事</h2><a href="#" class="right_position">阅读更多</a></div>
-    
+	</div>
 	
-		<div class="itemBox">
-    		<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  					am-avg-md-3 am-avg-lg-6 am-gallery-default">
-       <%  i=0;
-        for(Passage n : paAnecdote)
-		{
-			if(n==null||i>=10)break;
-			Users user=new Users();
-			UserOp uo=new UserOpImpl();
-			user=uo.getUsersInfo(n.getAuthor());
-        %>
-        	<div class="item">
-                <a href="article?id=<%=n.getId()%>" >
-                    <img class="photo" src="img/a1.jpg" alt="<%=n.getTitle()%>"/>
-                </a>
-                <div class="title"><b><span><%=n.getTitle()%></span></b></div>
-                <div class="article_info">
-                	<span>点击 <%=n.getClick()%>  </span>
-                	<span>评论 <%=n.getCommentNum()%>  </span>
-                	<span>喜爱 <%=n.getLikeNum()%></span>
-                </div>
-            
-            <a class="author" >
-           		<span><img class="photoinfo" width="20" height="20" src="<%=user.getProfil()%>" alt=""></span>
-          		<span><%=n.getAuthor()%></span>
-          	</a>
-          	</div>
-        <%
-        i++;}
-        %>
-   			</ul>
-		</div>
-    
-			
+
 	<footer>
 		<div class="footer-holder" >
 			<a href="" class="logo">Cooker Logo</a>

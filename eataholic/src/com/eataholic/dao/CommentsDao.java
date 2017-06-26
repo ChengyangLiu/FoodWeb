@@ -16,4 +16,10 @@ public interface CommentsDao {
 	
 	//get comments by belonged user name
 	public List<Comments> getCommentByUser(String userName);
+
+	//get all comments by id asc
+	public List<Comments> getAllCommentById();
+
+	//get one comment by id
+	public Comments getCommentById(int id);
 }

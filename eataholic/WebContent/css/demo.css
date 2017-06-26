@@ -75,7 +75,7 @@ a{
 	margin: 0px 20px 10px 20px;
 	position: relative;
 	display: block;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+	text-shadow: 1px 1px 1px rgba(255,0,0,0.9);
     text-align: center;
 }
 .container > header h1{
@@ -84,8 +84,8 @@ a{
 	line-height: 35px;
 	position: relative;
 	font-weight: 400;
-	color: rgba(26,89,120,0.9);
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+	color: rgba(255,0,0,0.9);
+	text-shadow: 1px 1px 1px rgba(255,0,0,0.1);
     padding: 0px 0px 5px 0px;
 }
 .container > header h1 span{

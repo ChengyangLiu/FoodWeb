@@ -31,6 +31,7 @@ public class DisplayPublishServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("connecte")==null||!((String) session.getAttribute("connecte")).equals("true")){
+			session.setAttribute("preurl", "publish");
 			response.sendRedirect("sign-in");
 		}
 		else{
